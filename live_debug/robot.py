@@ -15,5 +15,15 @@ class Robot(object):
     def display(self):
         stroke(0)
         strokeWeight(2)
-        fill(240)
-        ellipse(self.field.x + self.x, self.field.y + self.y, self.radius * 2, self.radius * 2)
+        fill(0, 0, 128)
+        x = self.field.x + self.x
+        y = self.field.y + self.y
+        ellipse(x, y, self.radius * 2, self.radius * 2)
+        angle = self.angle * (3.14/180.0)
+        stroke(32, 255, 32)
+        strokeWeight(0.5)
+        view_angle = 140
+        for a in [-view_angle/2.0, view_angle/2.0]:
+            a *= (3.14/180)
+            line(x - (sin(-angle) * (self.radius - 5)), y - (cos(-angle) * (self.radius - 5)), x - (sin(-angle + a) * 250), y - (cos(-angle + a) * 250))
+    
