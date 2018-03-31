@@ -1,0 +1,9 @@
+[submodule "robot/phantom-avr"]
+	path = robot/phantom-avr
+	url = git@github.com:PhantomEmbedded/avr-core.git
+[submodule "robot/oranje"]
+	path = robot/oranje
+	url = git@github.com:liamkinne/oranje-cpp.git
+[submodule "robot/phantom-stm32f10x"]
+	path = robot/phantom-stm32f10x
+	url = git@github.com:liamkinne/phantom-stm32f10x.git
