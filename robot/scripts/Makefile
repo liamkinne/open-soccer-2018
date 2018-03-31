@@ -1,10 +1,13 @@
-NAME = oranje
-SOURCES := ${wildcard src/*.cpp} ${wildcard src/Drive/*.cpp}
+SOURCES := ${wildcard ../src/*.cpp}
 OBJECTS := ${SOURCES:.cpp=.o}
+ORANJE_FLAGS := -L../oranje/ -loranje -I../oranje/src/
+PHANTOM_FLAGS := -L../phantom-avr/ -lphantom -I../phantom-avr/
 
-%.o: %.cpp
-	@avr-g++ -c -o $@ $< -Wall -Wextra -std=c++14 -O3 -I./src/ -mmcu=$(MMCU) -DF_CPU=$(F_CPU) -L$(P_LIB) -lphantom -I$(P_LIB) -L$(P_LIB)std/ -lstd -I$(P_LIB)std/
+# Chip specific
+F_CPU := 16000000
+MMCU := atmega328p
 
-all: $(OBJECTS)
-	@echo "Building library"
-	avr-ar rcsv lib$(NAME).a $^
+all: $(SOURCES)
+	make -fAVR.mk --directory=../oranje MMCU=$(MMCU) F_CPU=$(F_CPU)
+	avr-g++ $^ -o ../build/main.out $(ORANJE_FLAGS) $(PHANTOM_FLAGS) -Wall -Wextra -std=c++14 -O3 -mmcu=atmega328p -DF_CPU=16000000
+
